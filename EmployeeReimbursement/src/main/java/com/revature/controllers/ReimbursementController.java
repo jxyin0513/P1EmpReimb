@@ -1,8 +1,10 @@
 package com.revature.controllers;
 
+import com.revature.models.DTOs.ReimbursementDTO;
 import com.revature.models.Reimbursement;
 import com.revature.services.ReimbursementService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,12 +32,23 @@ public class ReimbursementController {
     }
 
     @PostMapping("/new")
-    public ResponseEntity<Reimbursement> addReimbursement(){
-        return null;
+    public ResponseEntity<Reimbursement> addReimbursement(@RequestBody ReimbursementDTO reimbursementDTO){
+        Reimbursement reimbursement = reimbursementService.addReimbursement(reimbursementDTO);
+        return ResponseEntity.status(201).body(reimbursement);
     }
 
-    @DeleteMapping("/{userId}")
-    public ResponseEntity<Boolean> deleteReimbursement(@PathVariable int userId){
-        return null;
+    @PatchMapping("/manager/update/{reimbId}")
+    public ResponseEntity<Reimbursement> updateReimbursementStatus(@PathVariable int reimbId, @RequestBody String status){
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(reimbursementService.updateReimbursementStatus(reimbId, status));
+    }
+
+    @PatchMapping("/description/{reimbId}")
+    public ResponseEntity<Reimbursement> updateReimbursementDescription(@PathVariable int reimbId, @RequestBody String description){
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(reimbursementService.updateReimbursementDescription(reimbId, description));
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> illegalArgumentException(IllegalArgumentException e){
+        return ResponseEntity.badRequest().body(e.getMessage());
     }
 }

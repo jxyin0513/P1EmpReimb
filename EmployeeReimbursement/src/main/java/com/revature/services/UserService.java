@@ -5,16 +5,21 @@ import com.revature.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
+    public List<User> getAllUsers(){
+        return userRepository.findAll();
+    }
     public User addUser(User user){
         if(user.getFirstName()==null || user.getFirstName().isBlank()){
             throw new IllegalArgumentException("Enter your first name.");
@@ -42,5 +47,18 @@ public class UserService {
             throw new IllegalArgumentException("Password incorrect");
         }
         return user;
+    }
+
+    public User updateUserRole(int userId, String role){
+        User user = userRepository.findById(userId).orElseThrow(()-> new IllegalArgumentException("Invalid userId."));
+        user.setRole(role);
+        userRepository.save(user);
+        return user;
+    }
+
+    public Boolean deleteUser(int userId){
+        User user = userRepository.findById(userId).orElseThrow(()-> new IllegalArgumentException("Invalid userId."));
+        userRepository.delete(user);
+        return true;
     }
 }
