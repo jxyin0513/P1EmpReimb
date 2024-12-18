@@ -1,15 +1,18 @@
 package com.revature.controllers;
 
+import com.revature.models.DTOs.OutgoingUserDTO;
 import com.revature.models.User;
 import com.revature.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin
 public class UserController {
 
     private final UserService userService;
@@ -19,17 +22,20 @@ public class UserController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<User>> getAllUsers(){
+    public ResponseEntity<List<OutgoingUserDTO>> getAllUsers(){
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
     @PostMapping("/login")
-    public ResponseEntity<User> logInUser(@RequestBody String username, @RequestBody String password){
-        if(username.isBlank() || password.isBlank()){
+    public ResponseEntity<User> logInUser(@RequestBody User user){
+//        System.out.println(username +  password);
+        if(user.getUsername().isBlank() || user.getPassword().isBlank()){
+//            List<String> errors = new ArrayList<>();
+//            errors.add("Please provide username and password");
             throw new IllegalArgumentException("Please provide username and password");
         }
-        User user = userService.logInUser(username, password);
-        return ResponseEntity.status(202).body(user);
+        User userLogIn = userService.logInUser(user.getUsername(), user.getPassword());
+        return ResponseEntity.status(202).body(userLogIn);
     }
 
     @PostMapping("/create")

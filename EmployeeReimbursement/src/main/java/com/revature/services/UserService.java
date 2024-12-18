@@ -1,10 +1,12 @@
 package com.revature.services;
 
 import com.revature.Repositories.UserRepository;
+import com.revature.models.DTOs.OutgoingUserDTO;
 import com.revature.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,8 +19,22 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public List<User> getAllUsers(){
-        return userRepository.findAll();
+    public List<OutgoingUserDTO> getAllUsers(){
+        List<User> users = userRepository.findAll();
+        List<OutgoingUserDTO> user_DTOs = new ArrayList<>();
+
+        for(User user:users){
+            OutgoingUserDTO userDTO = new OutgoingUserDTO(
+                                 user.getUserId(),
+                    user.getFirstName(),
+                    user.getLastName(),
+                    user.getRole(),
+                    user.getUsername(),
+                    user.getReimbursements()
+                            );
+            user_DTOs.add(userDTO);
+        }
+        return user_DTOs;
     }
     public User addUser(User user){
         if(user.getFirstName()==null || user.getFirstName().isBlank()){
@@ -43,7 +59,7 @@ public class UserService {
         if(user==null){
             throw new IllegalArgumentException("No such username" + " "+ username);
         }
-        if(user.getPassword() != password){
+        if(!user.getPassword().equals(password)){
             throw new IllegalArgumentException("Password incorrect");
         }
         return user;
