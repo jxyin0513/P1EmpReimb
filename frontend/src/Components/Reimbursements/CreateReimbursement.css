@@ -1,0 +1,36 @@
+.create-reimb-Container{
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; */
+    /* margin-top: 15px; */
+    background-color: white;
+    border-radius: 15px;
+}
+.create-reimb-Form{
+    padding: 0 0 15px 20px;
+}
+.error-Reimbs{
+    color: red;
+    font-size: 15px;
+    font-weight:600;
+    /* padding: 5px 0 0px 0; */
+}
+.create-reimb-Form > div {
+    margin-bottom: 0px;
+}
+
+.create-reimb-Container > h2 {
+    padding: 30px 20px 15px 15px;
+}
+.create-reimb-Form input {
+    /* padding: 3px; */
+    /* width: 200px; */
+    margin-bottom: 10px;
+}
+
+.create-reimb-Form button {
+    /* padding: 3px; */
+    margin: 0px 10px 5px 0;
+    cursor: pointer;
+}

@@ -1,0 +1,25 @@
+.edit-reimb-Container{
+    background-color: white;
+    border-radius: 15px;
+}
+.edit-reimb-Form{
+    padding: 0 0 15px 20px;
+}
+.edit-reimb-Form > div {
+    margin-bottom: 0px;
+}
+
+.edit-reimb-Container > h2 {
+    padding: 30px 20px 15px 15px;
+}
+.edit-reimb-Form input {
+    /* padding: 3px; */
+    /* width: 200px; */
+    margin-bottom: 10px;
+}
+
+.edit-reimb-Form button {
+    /* padding: 3px; */
+    margin: 0px 10px 5px 0;
+    cursor: pointer;
+}

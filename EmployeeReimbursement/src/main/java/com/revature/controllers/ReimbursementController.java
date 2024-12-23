@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/reimbursements")
-@CrossOrigin
+@CrossOrigin(value = "http://localhost:5173", allowCredentials = "true")
 public class ReimbursementController {
 
     private ReimbursementService reimbursementService;
@@ -26,7 +26,10 @@ public class ReimbursementController {
     public ResponseEntity<List<Reimbursement>> getAllReimbursements(){
         return ResponseEntity.ok(reimbursementService.getAllReimbursements());
     }
-
+    @GetMapping("/status/{userId}")
+    public ResponseEntity<List<Reimbursement>> getReimbursementsByStatus(@PathVariable int userId){
+        return ResponseEntity.ok(reimbursementService.getReimbursementsByStatus(userId));
+    }
     @GetMapping("/{userId}")
     public ResponseEntity<List<Reimbursement>> getReimbursementsByUserId(@PathVariable int userId){
         return ResponseEntity.ok(reimbursementService.getReimbursementsByUserId(userId));
@@ -38,18 +41,25 @@ public class ReimbursementController {
         return ResponseEntity.status(201).body(reimbursement);
     }
 
-    @PatchMapping("/manager/update/{reimbId}")
+    @PatchMapping("/status/{reimbId}")
     public ResponseEntity<Reimbursement> updateReimbursementStatus(@PathVariable int reimbId, @RequestBody String status){
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(reimbursementService.updateReimbursementStatus(reimbId, status));
+        return ResponseEntity.status(HttpStatus.OK).body(reimbursementService.updateReimbursementStatus(reimbId, status));
     }
 
-    @PatchMapping("/description/{reimbId}")
-    public ResponseEntity<Reimbursement> updateReimbursementDescription(@PathVariable int reimbId, @RequestBody String description){
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(reimbursementService.updateReimbursementDescription(reimbId, description));
+    @PatchMapping("/update/{reimbId}")
+    public ResponseEntity<Reimbursement> updateReimbursementDescription(@PathVariable int reimbId, @RequestBody Reimbursement reimbursement){
+        System.out.println(reimbursement);
+
+        return ResponseEntity.status(HttpStatus.OK).body(reimbursementService.updateReimbursement(reimbId, reimbursement.getDescription(), reimbursement.getAmount()));
+    }
+    @DeleteMapping("/delete/{reimbId}")
+    public ResponseEntity<String> deleteReimbursement(@PathVariable int reimbId){
+        reimbursementService.deleteReimbursement(reimbId);
+        return ResponseEntity.status(204).body("Successfully deleted a reimbursement.");
     }
 
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<String> illegalArgumentException(IllegalArgumentException e){
-        return ResponseEntity.badRequest().body(e.getMessage());
-    }
+//    @ExceptionHandler(IllegalArgumentException.class)
+//    public ResponseEntity<String> illegalArgumentException(IllegalArgumentException e){
+//        return ResponseEntity.badRequest().body(e.getMessage());
+//    }
 }

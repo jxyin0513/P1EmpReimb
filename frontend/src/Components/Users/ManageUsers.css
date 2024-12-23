@@ -1,0 +1,20 @@
+#user-Promote, #delete-User{
+    cursor: pointer;
+    /* width: 23px; */
+    margin: 0 0px 0 10px;
+}
+#delete-User{
+    color: #dc3545;
+}
+#user-Promote{
+    color: #006eff;
+}
+#user-Promote:hover{
+    color: #0353a8;
+}
+#delete-User:hover{
+    color: #bd2130;
+}
+.manage-Users-Container > h2{
+    text-align: center;
+}

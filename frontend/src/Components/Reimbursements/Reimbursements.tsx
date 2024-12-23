@@ -1,9 +1,9 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { useEffect , useState} from "react"
 import { Table } from "react-bootstrap"
-import { User } from "../Auth/Users"
+import { User } from "../Users/ManagerProfile"
 
-interface Reimbursement{
+export interface Reimbursement{
     reimbId:number
     description:string
     amount:number
@@ -16,7 +16,7 @@ export const Reimbursements:React.FC = ()=>{
     const [reimbursements, setReimbursements] = useState<Reimbursement []>()
 
     useEffect(()=>{
-        axios.get(`http://localhost:4040/reimbursements/`)
+        axios.get(`http://localhost:4040/reimbursements/`, {withCredentials: true})
         .then((res)=>{
             console.log(res.data);
             setReimbursements(res.data);

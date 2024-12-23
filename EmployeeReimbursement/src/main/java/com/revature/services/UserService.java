@@ -4,6 +4,7 @@ import com.revature.Repositories.UserRepository;
 import com.revature.models.DTOs.OutgoingUserDTO;
 import com.revature.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class UserService {
     }
 
     public List<OutgoingUserDTO> getAllUsers(){
-        List<User> users = userRepository.findAll();
+        List<User> users = userRepository.findAll(Sort.by(Sort.Direction.ASC, "userId"));
         List<OutgoingUserDTO> user_DTOs = new ArrayList<>();
 
         for(User user:users){
@@ -56,6 +57,7 @@ public class UserService {
 
     public User logInUser(String username, String password){
         User user = userRepository.findByUsername(username);
+        System.out.println(user);
         if(user==null){
             throw new IllegalArgumentException("No such username" + " "+ username);
         }

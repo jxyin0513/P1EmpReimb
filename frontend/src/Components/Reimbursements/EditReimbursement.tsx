@@ -1,34 +1,28 @@
 import axios from "axios"
 import { useState } from "react"
-import { Reimbursement as Reimb } from "./Reimbursements";
-import "./CreateReimbursement.css"
-
-interface Reimbursement{
-    description:string
-    amount:number
-    status?:string | null
-    userId:number
-}
+import { Reimbursement } from "./Reimbursements";
+import "./EditReimbursement.css"
 
 interface ReimbursementProps {
-    userId:number;
+    reimb:Reimbursement ;
     onClose: () => void;
-    setReimb: (reimb:Reimb)=>void;
+    setReimb: (reimb:Reimbursement)=>void;
 }
 
-export const CreateReimbursement:React.FC<ReimbursementProps> = ({userId, setReimb, onClose})=>{
-    const [description, setDescription] = useState<string>("");
-    const [amount, setAmount] = useState<number>(0.00);
+export const EditReimbursement:React.FC<ReimbursementProps> = ({reimb, setReimb, onClose})=>{
+    const [description, setDescription] = useState<string>(reimb.description);
+    const [amount, setAmount] = useState<number>(reimb.amount);
     const [error, setError] = useState<string>("");
     // console.log(userId, onClose);
     const newReimb = async ()=>{
         const reimbursement:Reimbursement = {
+            reimbId: reimb.reimbId,
             description,
             amount,
-            status:"pending",
-            userId
+            status:reimb.status,
+            user:reimb.user
         }
-        axios.post("http://localhost:4040/reimbursements/new", reimbursement, {withCredentials:true})
+        axios.patch(`http://localhost:4040/reimbursements/update/${reimb.reimbId}`, reimbursement, {withCredentials:true})
         .then((res)=>{
             console.log(res.data);
             setReimb(res.data);
@@ -37,9 +31,9 @@ export const CreateReimbursement:React.FC<ReimbursementProps> = ({userId, setRei
     }
 
     return(
-        <div className="create-reimb-Container">
-            <h2>New Reimbursement</h2>
-            <div className="create-reimb-Form">
+        <div className="edit-reimb-Container">
+            <h2>Edit Reimbursement</h2>
+            <div className="edit-reimb-Form">
                 <div className="error-handler-Container">
                     {error.length>0 && <div className="error-Reimbs">* {error}</div>}
                 </div>
@@ -49,7 +43,7 @@ export const CreateReimbursement:React.FC<ReimbursementProps> = ({userId, setRei
                 <div>
                     <input id="descpt" type="text" value={description} placeholder="Describe reimbursement" onChange={(e)=>setDescription(e.target.value)}></input>
                 </div>
-                <button type="button" className="btn btn-outline-primary btn-sm" onClick={newReimb}>Create</button>
+                <button type="button" className="btn btn-outline-primary btn-sm" onClick={newReimb}>Edit</button>
                 <button type="button" className="btn btn-outline-danger btn-sm" onClick={()=>onClose()}>Cancel</button>
             </div>
         </div>

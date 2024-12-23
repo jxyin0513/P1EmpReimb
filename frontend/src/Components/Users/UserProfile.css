@@ -1,0 +1,129 @@
+.header-Tags >  h3{
+    margin: 10px 15px 0px 0;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: end;
+}
+.non-Manager-Header{
+    margin: 10px 20px 0px 0;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: end;
+}
+.pending{
+    background-color:rgba(238, 238, 49, 0.63);
+    width:fit-content;
+    padding: 3px 4px;
+    border-radius: 4px;
+}
+.denied{
+    background-color:rgba(238, 49, 49, 0.63);
+    width:fit-content;
+    padding: 3px 4px;
+    border-radius: 4px;
+}
+.approved{
+    background-color:#28a745;
+    width:fit-content;
+    padding: 3px 4px;
+    border-radius: 4px;
+}
+.table-Container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin: 0 0 50px 0; */
+}
+.table-Container > table{
+    border-collapse: collapse;
+    width: 75%;
+    
+    /* max-width: 900px;
+    margin: 0 auto;
+    text-align: left;
+    /* border: 1px solid #ccc;  */
+}
+th, td {
+    padding: 10px;
+  }
+td{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 16px;
+}
+.reimb-Title{
+    text-align: center;
+    padding: 15px 0 0 0;
+    /* font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif */
+}
+.buttons-Container{
+    display: flex;;
+    justify-content: space-around;
+    align-items: center;
+    margin: 40px 0 25px 0;
+}
+.buttons-Reimb > button{
+    margin: 0 20px 0 5px;
+}
+#edit-Reimb{
+    /* background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 7px; */
+    cursor: pointer;
+    margin: 0 0 0 17px;
+}
+#edit-Reimb:hover{
+    color: #007bff;
+}
+.no-Reimbursements{
+    text-align: center;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 30px 0;
+    font-size: 23px;
+    font-style: italic;
+    font-weight: 700;
+}
+
+
+
+
+/* .user-profile {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+.reimbursements-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 80vw;
+}
+
+.reimbursements-list > li {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.reimbursements-list li:hover {
+    background-color: #f1f1f1;
+}
+
+.reimbursement-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.reimbursement-amount {
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.reimbursement-date {
+    font-size: 0.9em;
+    color: #888;
+} */
