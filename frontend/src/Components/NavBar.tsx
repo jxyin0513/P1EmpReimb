@@ -17,9 +17,10 @@ export const NavBar: React.FC = () => {
     
     const onHome = () => {
         if(user){
-            setUser(null);
+            logOut();
+        }else{
+           navigate("/"); 
         }
-        navigate("/");
     }
     const logOut = async () =>{
 
