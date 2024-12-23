@@ -40,8 +40,8 @@ export const ManageUsers: React.FC = () => {
     }).catch((err)=>console.log(err.response.data));
 }
 
-    const onDelete = (id:number)=>{
-        axios.delete(`http://localhost:4040/users/delete/${id}`, {withCredentials:true, headers:{ "Content-Type": "text/plain"
+    const onDelete = async (id:number)=>{
+        await axios.delete(`http://localhost:4040/users/delete/${id}`, {withCredentials:true, headers:{ "Content-Type": "text/plain"
         }}).then((res)=>{
             console.log(res.data);
             setUsers([...users.filter((user)=>user.userId !== id)]);

@@ -15,6 +15,12 @@ export const NavBar: React.FC = () => {
     const navigate = useNavigate();
     const {user, setUser} = useContext(UserContext);
     
+    const onHome = () => {
+        if(user){
+            setUser(null);
+        }
+        navigate("/");
+    }
     const logOut = async () =>{
 
         await axios.delete(`http://localhost:4040/users/logout`, {withCredentials:true})
@@ -34,9 +40,9 @@ export const NavBar: React.FC = () => {
     }
     return (
         <nav style={styles.nav}>
-            <NavLink to={"/"} end className={"logo"} style={styles.brand}>
-                <div>ReImb</div>
-            </NavLink>
+            {/* <NavLink to={"/"} end className={"logo"} style={styles.brand}></NavLink> */}
+                <div className={"logo"} onClick={onHome} style={styles.brand}>ReImb</div>
+            
             <div style={styles.buttons}>
                 {user ? (
                     <Button onClick={()=>logOut()}>Logout</Button>
@@ -64,6 +70,7 @@ const styles = {
         fontSize: '1.5rem',
         textDecoration: "none",
         color: "#fff",
+        cursor: "pointer",
     },
     buttons: {
         display: 'flex',

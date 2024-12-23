@@ -20,8 +20,8 @@ export const ManagerProfile:React.FC = ()=>{
     const navigate = useNavigate();
     const [reimbursements, setReimbursements] = useState<Reimbursement []>([]);
     const [pendingReimbs, setPendingReimbs] = useState<Reimbursement []>([]);
-    const [pending, setPending] = useState<boolean>(false);
-    const [checkUsers, setCheckUsers] = useState<boolean>(true);
+    const [pending, setPending] = useState<boolean>(true);
+    const [checkUsers, setCheckUsers] = useState<boolean>(false);
     const {user} = useContext(UserContext);
     
     useEffect(()=>{
@@ -62,8 +62,8 @@ export const ManagerProfile:React.FC = ()=>{
             }).catch((err)=>console.log(err.response.data));
     }
 
-    const deleteReimb = (id:number)=>{
-        axios.delete(`http://localhost:4040/reimbursements/delete/${id}`, {withCredentials:true
+    const deleteReimb = async (id:number)=>{
+        await axios.delete(`http://localhost:4040/reimbursements/delete/${id}`, {withCredentials:true
         }).then((res)=>{
             console.log(res.data);
             setReimbursements([...reimbursements.filter((reimb)=>reimb.reimbId !== id)]);

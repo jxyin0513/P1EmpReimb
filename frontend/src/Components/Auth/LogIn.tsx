@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom";
-import { User as LoggedInUser } from "../Users/ManagerProfile";
+// import { User as LoggedInUser } from "../Users/ManagerProfile";
 import { UserContext } from "../Context";
 import "./LogIn.css";
 import { NavBar } from "../NavBar";
@@ -19,7 +19,7 @@ export const LogIn:React.FC = ()=>{
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [error, setError] = useState<string>("");
-    const {user, setUser} = useContext(UserContext);
+    const {setUser} = useContext(UserContext);
 
     // console.log(user, updateUser)
     const logIn = async () =>{
@@ -31,7 +31,7 @@ export const LogIn:React.FC = ()=>{
             role:null
         }
         // console.log(user)
-        axios.post("http://localhost:4040/users/login", user, {withCredentials:true})
+        await axios.post("http://localhost:4040/users/login", user, {withCredentials:true})
         .then((res)=>{
             // console.log(res.data.role)
             // if(res.data.role === "employee"){

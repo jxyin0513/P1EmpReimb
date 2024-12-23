@@ -41,12 +41,14 @@ export const UserProfile: React.FC = () => {
             navigate("/");
             return;
         }
-
-        axios.get(`http://localhost:4040/reimbursements/${user.userId}`, {withCredentials:true})
+        const userReimb = async()=>{
+        await axios.get(`http://localhost:4040/reimbursements/${user.userId}`, {withCredentials:true})
         .then((res)=>{
             console.log(res.data);
             setReimbursements(res.data);
         }).catch((err)=>console.log(err.response.data));
+        }
+        userReimb();
     },[])
 
     useEffect(()=>{
@@ -74,8 +76,8 @@ export const UserProfile: React.FC = () => {
             }
         })
     ])}
-    const deleteReimbursement = (id:number)=>{
-        axios.delete(`http://localhost:4040/reimbursements/delete/${id}`, {withCredentials:true
+    const deleteReimbursement = async (id:number)=>{
+        await axios.delete(`http://localhost:4040/reimbursements/delete/${id}`, {withCredentials:true
         }).then((res)=>{
             console.log(res.data);
             setReimbursements([...reimbursements.filter((reimb)=>reimb.reimbId !== id)]);

@@ -28,11 +28,11 @@ public class ReimbursementService {
     }
 
     public List<Reimbursement> getReimbursementsByStatus(int userId){
-        return reimbursementRepository.findByUser_UserIdAndStatus(userId, "pending");
+        return reimbursementRepository.findByUser_UserIdAndStatus(userId, "pending", Sort.by(Sort.Direction.ASC, "reimbId"));
     }
 
     public List<Reimbursement> getReimbursementsByUserId(int userId){
-        return reimbursementRepository.findByUserUserId(userId);
+        return reimbursementRepository.findByUserUserId(userId, Sort.by(Sort.Direction.ASC, "reimbId"));
     }
 
     public Reimbursement addReimbursement(ReimbursementDTO reimbursementDTO) {

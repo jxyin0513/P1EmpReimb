@@ -30,7 +30,7 @@ export const SignUp:React.FC = ()=>{
             password,
             role: "employee"
         }
-        axios.post("http://localhost:4040/users/create", user, {withCredentials: true})
+        await axios.post("http://localhost:4040/users/create", user, {withCredentials: true})
         .then((res)=>{
             console.log(res);
             setUser(res.data);
