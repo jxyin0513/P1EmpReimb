@@ -29,6 +29,10 @@ export const ManagerProfile:React.FC = ()=>{
             navigate("/");
             return;
         }
+        if(user.role!=="manager") {
+            navigate("/user/reimbursements");
+            return
+        }
         const managerPage = async()=>{
             await axios.get(`http://localhost:4040/reimbursements/all`, {withCredentials:true})
             .then((res)=>{
@@ -75,7 +79,7 @@ export const ManagerProfile:React.FC = ()=>{
     const onAllReimbs = ()=>{ setPending(false); setCheckUsers(false)};
 
     if(!user) return null;
-    
+    if(user.role!=="manager") return null;
     return(
         <div className="manager-Container">
             <NavBar />
@@ -153,7 +157,7 @@ export const ManagerProfile:React.FC = ()=>{
                 </Table>
             </div>
             </div>}
-            {checkUsers && <ManageUsers />}
+            {checkUsers && <ManageUsers reimbursements={reimbursements} setReimbs={(reimbs:Reimbursement[])=>setReimbursements([...reimbs])} />}
         </div>
     )
 }

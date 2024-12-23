@@ -5,8 +5,9 @@ import { UserContext } from "../Context";
 import axios from "axios";
 import { Table } from "react-bootstrap";
 import "./ManageUsers.css";
+import { Reimbursement } from "../Reimbursements/Reimbursements";
 
-export const ManageUsers: React.FC = () => {
+export const ManageUsers: React.FC<{reimbursements:Reimbursement[], setReimbs:(reimb:Reimbursement[])=>void }> = ({reimbursements, setReimbs}) => {
     const navigate = useNavigate();
     const [users, setUsers] = useState<User []>([]);
     const {user:logInUser} = useContext(UserContext);
@@ -46,6 +47,9 @@ export const ManageUsers: React.FC = () => {
             console.log(res.data);
             setUsers([...users.filter((user)=>user.userId !== id)]);
         }).catch((err)=>console.log(err.response.data));
+        const copyReimbs = [...reimbursements];
+        const newReimbs = copyReimbs.filter((reimb)=>reimb.user.userId !== id);
+        setReimbs(newReimbs);
     }
     
     return (
