@@ -15,7 +15,7 @@ import java.util.List;
 @CrossOrigin(value = "http://localhost:5173", allowCredentials = "true")
 public class ReimbursementController {
 
-    private ReimbursementService reimbursementService;
+    private final ReimbursementService reimbursementService;
 
     @Autowired
     public ReimbursementController(ReimbursementService reimbursementService) {
