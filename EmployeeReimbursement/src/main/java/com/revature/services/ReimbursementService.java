@@ -32,7 +32,7 @@ public class ReimbursementService {
     }
 
     public List<Reimbursement> getReimbursementsByUserId(int userId){
-        return reimbursementRepository.findByUserUserId(userId, Sort.by(Sort.Direction.ASC, "reimbId"));
+        return reimbursementRepository.findByUser_UserId(userId, Sort.by(Sort.Direction.ASC, "reimbId"));
     }
 
     public Reimbursement addReimbursement(ReimbursementDTO reimbursementDTO) {
