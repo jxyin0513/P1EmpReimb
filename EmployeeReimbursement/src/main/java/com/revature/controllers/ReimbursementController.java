@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/reimbursements")
-@CrossOrigin(value = "http://localhost:5173", allowCredentials = "true")
+//@CrossOrigin(value = "http://localhost:5173", allowCredentials = "true")
 public class ReimbursementController {
     private final ReimbursementService reimbursementService;
 
